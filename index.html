@@ -6,7 +6,7 @@
   <title>宇宙への挑戦者たち｜Challengers of the Cosmos</title>
   <meta name="description" content="宇宙スタートアップ・宇宙ベンチャーに特化した密着ドキュメンタリー制作">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Architects+Daughter&display=swap');
     
     :root {
       /* ダークモード（デフォルト） */
@@ -125,7 +125,7 @@
     }
     
     /* ========================================
-       ライトモード背景（ブループリント）
+       ライトモード背景（手書きブループリント）
        ======================================== */
     .blueprint-bg {
       display: none;
@@ -139,29 +139,90 @@
     [data-theme="light"] .blueprint-bg {
       display: block;
       background: 
-        linear-gradient(rgba(30,95,168,0.04) 2px, transparent 2px),
-        linear-gradient(90deg, rgba(30,95,168,0.04) 2px, transparent 2px),
-        linear-gradient(rgba(30,95,168,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(30,95,168,0.02) 1px, transparent 1px),
-        var(--bg-primary);
-      background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+        /* 手書き風の不規則なグリッド */
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 98px,
+          rgba(30,95,168,0.08) 98px,
+          rgba(30,95,168,0.04) 102px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 98px,
+          rgba(30,95,168,0.08) 98px,
+          rgba(30,95,168,0.04) 102px
+        ),
+        /* 細いグリッド線（ややぼやけた感じ） */
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 19px,
+          rgba(30,95,168,0.025) 19px,
+          rgba(30,95,168,0.015) 21px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 19px,
+          rgba(30,95,168,0.025) 19px,
+          rgba(30,95,168,0.015) 21px
+        ),
+        /* 紙のテクスチャ風グラデーション */
+        radial-gradient(ellipse at 30% 20%, rgba(200,220,255,0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(180,200,240,0.3) 0%, transparent 50%),
+        linear-gradient(180deg, #e8f4ff 0%, #f5faff 50%, #eef6ff 100%);
     }
     
-    /* ロケット設計図 */
+    /* 手書き風注釈 */
+    .blueprint-annotations {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      font-family: 'Architects Daughter', cursive;
+      color: rgba(30,95,168,0.3);
+    }
+    
+    [data-theme="light"] .blueprint-annotations {
+      display: block;
+    }
+    
+    .annotation {
+      position: absolute;
+      font-size: 14px;
+      transform: rotate(-3deg);
+    }
+    
+    .annotation.a1 { top: 15%; left: 5%; transform: rotate(-5deg); }
+    .annotation.a2 { top: 45%; right: 8%; transform: rotate(3deg); }
+    .annotation.a3 { bottom: 25%; left: 8%; transform: rotate(-2deg); }
+    .annotation.a4 { top: 70%; right: 5%; transform: rotate(4deg); }
+    
+    /* ロケット設計図（手書き風） */
     .blueprint-rocket {
       display: none;
       position: fixed;
-      top: 5%;
-      right: 3%;
-      width: 350px;
-      height: 700px;
+      top: 8%;
+      right: 5%;
+      width: 280px;
+      height: 560px;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.12;
+      opacity: 0.18;
+      animation: sketchFloat 8s ease-in-out infinite;
     }
     
     [data-theme="light"] .blueprint-rocket {
       display: block;
+    }
+    
+    @keyframes sketchFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(0.5deg); }
     }
     
     .blueprint-rocket svg {
@@ -169,21 +230,27 @@
       height: 100%;
     }
     
-    /* 人工衛星設計図 */
+    /* 人工衛星設計図（手書き風） */
     .blueprint-satellite {
       display: none;
       position: fixed;
-      bottom: 10%;
-      left: 2%;
-      width: 450px;
-      height: 250px;
+      bottom: 12%;
+      left: 3%;
+      width: 380px;
+      height: 200px;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.10;
+      opacity: 0.15;
+      animation: sketchFloat2 10s ease-in-out infinite;
     }
     
     [data-theme="light"] .blueprint-satellite {
       display: block;
+    }
+    
+    @keyframes sketchFloat2 {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(8px) rotate(-0.5deg); }
     }
     
     .blueprint-satellite svg {
@@ -191,7 +258,7 @@
       height: 100%;
     }
     
-    /* 角マーカー */
+    /* 手書き風の角マーカー */
     .corner-markers {
       display: none;
       position: fixed;
@@ -205,14 +272,34 @@
     
     .corner-mark {
       position: absolute;
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
     }
     
-    .corner-mark.tl { top: 20px; left: 20px; border-top: 3px solid rgba(30,95,168,0.25); border-left: 3px solid rgba(30,95,168,0.25); }
-    .corner-mark.tr { top: 20px; right: 20px; border-top: 3px solid rgba(30,95,168,0.25); border-right: 3px solid rgba(30,95,168,0.25); }
-    .corner-mark.bl { bottom: 20px; left: 20px; border-bottom: 3px solid rgba(30,95,168,0.25); border-left: 3px solid rgba(30,95,168,0.25); }
-    .corner-mark.br { bottom: 20px; right: 20px; border-bottom: 3px solid rgba(30,95,168,0.25); border-right: 3px solid rgba(30,95,168,0.25); }
+    .corner-mark.tl { 
+      top: 25px; left: 25px; 
+      border-top: 2px solid rgba(30,95,168,0.3); 
+      border-left: 2px solid rgba(30,95,168,0.3);
+      transform: rotate(-1deg);
+    }
+    .corner-mark.tr { 
+      top: 25px; right: 25px; 
+      border-top: 2px solid rgba(30,95,168,0.3); 
+      border-right: 2px solid rgba(30,95,168,0.3);
+      transform: rotate(1deg);
+    }
+    .corner-mark.bl { 
+      bottom: 25px; left: 25px; 
+      border-bottom: 2px solid rgba(30,95,168,0.3); 
+      border-left: 2px solid rgba(30,95,168,0.3);
+      transform: rotate(1deg);
+    }
+    .corner-mark.br { 
+      bottom: 25px; right: 25px; 
+      border-bottom: 2px solid rgba(30,95,168,0.3); 
+      border-right: 2px solid rgba(30,95,168,0.3);
+      transform: rotate(-1deg);
+    }
     
     /* ========================================
        共通レイアウト
@@ -237,6 +324,8 @@
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 15px;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out forwards;
     }
     
     .section-title {
@@ -244,6 +333,26 @@
       font-weight: 700;
       margin-bottom: 50px;
       letter-spacing: 0.05em;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.2s forwards;
+    }
+    
+    /* カードのホバーエフェクト強化 */
+    .work-card, .proposal-card, .benefit-card, .team-card, .schedule-step {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .work-card:hover, .proposal-card:hover, .benefit-card:hover, .team-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    
+    /* ライトモードでのカード影調整 */
+    [data-theme="light"] .work-card:hover,
+    [data-theme="light"] .proposal-card:hover,
+    [data-theme="light"] .benefit-card:hover,
+    [data-theme="light"] .team-card:hover {
+      box-shadow: 0 20px 40px rgba(30,95,168,0.15);
     }
     
     /* ========================================
@@ -303,9 +412,15 @@
     }
     
     .hero-logo {
-      max-width: 500px;
-      width: 90%;
-      margin-bottom: 30px;
+      max-width: 700px;
+      width: 95%;
+      margin-bottom: 40px;
+      animation: logoFadeIn 1.5s ease-out;
+    }
+    
+    @keyframes logoFadeIn {
+      0% { opacity: 0; transform: scale(0.9) translateY(20px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
     }
     
     [data-theme="light"] .hero-logo {
@@ -313,27 +428,36 @@
     }
     
     .hero-tagline {
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 300;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.3em;
       color: var(--text-secondary);
       margin-bottom: 50px;
+      animation: fadeInUp 1s ease-out 0.5s both;
+    }
+    
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
     
     .hero-cta {
       display: inline-block;
-      padding: 15px 50px;
+      padding: 18px 60px;
       border: 1px solid var(--border-accent);
       color: var(--accent);
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       letter-spacing: 0.15em;
       transition: all 0.3s;
+      animation: fadeInUp 1s ease-out 0.8s both;
     }
     
     .hero-cta:hover {
       background: var(--accent);
       color: #000;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
     
     /* ========================================
@@ -713,59 +837,84 @@
   <!-- ライトモード背景（ブループリント） -->
   <div class="blueprint-bg"></div>
   
-  <!-- ロケット設計図 -->
+  <!-- 手書き風注釈 -->
+  <div class="blueprint-annotations">
+    <span class="annotation a1">ROCKET v2.1</span>
+    <span class="annotation a2">scale 1:200</span>
+    <span class="annotation a3">satellite module</span>
+    <span class="annotation a4">rev. 2026.03</span>
+  </div>
+  
+  <!-- ロケット設計図（手書き風） -->
   <div class="blueprint-rocket">
     <svg viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- 手書き風のストローク -->
+      <defs>
+        <filter id="sketch">
+          <feTurbulence type="turbulence" baseFrequency="0.05" numOctaves="2" result="noise"/>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="1" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+      </defs>
       <!-- ロケット本体 -->
-      <path d="M50 5 L60 25 L63 60 L63 140 L70 165 L70 190 L58 180 L58 160 L55 160 L55 175 L50 185 L45 175 L45 160 L42 160 L42 180 L30 190 L30 165 L37 140 L37 60 L40 25 Z" 
-            stroke="#1e5fa8" fill="none" stroke-width="0.8"/>
+      <path d="M50 5 Q55 15 60 25 L63 60 L63 140 Q67 155 70 165 L70 190 L58 180 L58 160 L55 160 L55 175 L50 185 L45 175 L45 160 L42 160 L42 180 L30 190 L30 165 Q33 155 37 140 L37 60 Q43 15 50 5" 
+            stroke="#1e5fa8" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="filter:url(#sketch)"/>
       <!-- ノーズコーン詳細 -->
-      <ellipse cx="50" cy="35" rx="10" ry="6" stroke="#1e5fa8" fill="none" stroke-width="0.5"/>
-      <circle cx="50" cy="35" r="4" stroke="#1e5fa8" fill="none" stroke-width="0.5"/>
+      <ellipse cx="50" cy="35" rx="10" ry="6" stroke="#1e5fa8" fill="none" stroke-width="0.6" stroke-dasharray="3,2"/>
+      <circle cx="50" cy="35" r="4" stroke="#1e5fa8" fill="none" stroke-width="0.6"/>
       <!-- セクション線 -->
-      <line x1="37" y1="60" x2="63" y2="60" stroke="#1e5fa8" stroke-width="0.4"/>
-      <line x1="37" y1="80" x2="63" y2="80" stroke="#1e5fa8" stroke-width="0.4"/>
-      <line x1="37" y1="100" x2="63" y2="100" stroke="#1e5fa8" stroke-width="0.4"/>
-      <line x1="37" y1="120" x2="63" y2="120" stroke="#1e5fa8" stroke-width="0.4"/>
-      <line x1="37" y1="140" x2="63" y2="140" stroke="#1e5fa8" stroke-width="0.4"/>
-      <!-- 寸法線 -->
-      <line x1="20" y1="5" x2="20" y2="190" stroke="#1e5fa8" stroke-width="0.3"/>
-      <line x1="18" y1="5" x2="22" y2="5" stroke="#1e5fa8" stroke-width="0.3"/>
-      <line x1="18" y1="190" x2="22" y2="190" stroke="#1e5fa8" stroke-width="0.3"/>
+      <path d="M37 60 Q50 62 63 60" stroke="#1e5fa8" stroke-width="0.5" fill="none"/>
+      <path d="M37 80 Q50 82 63 80" stroke="#1e5fa8" stroke-width="0.5" fill="none"/>
+      <path d="M37 100 Q50 102 63 100" stroke="#1e5fa8" stroke-width="0.5" fill="none"/>
+      <path d="M37 120 Q50 118 63 120" stroke="#1e5fa8" stroke-width="0.5" fill="none"/>
+      <path d="M37 140 Q50 142 63 140" stroke="#1e5fa8" stroke-width="0.5" fill="none"/>
+      <!-- 寸法線（手書き風） -->
+      <path d="M18 5 Q20 100 20 190" stroke="#1e5fa8" stroke-width="0.4" fill="none" stroke-dasharray="4,2"/>
+      <line x1="16" y1="5" x2="24" y2="5" stroke="#1e5fa8" stroke-width="0.5"/>
+      <line x1="16" y1="190" x2="24" y2="190" stroke="#1e5fa8" stroke-width="0.5"/>
       <!-- クロスヘア -->
-      <circle cx="50" cy="100" r="15" stroke="#1e5fa8" fill="none" stroke-width="0.3" stroke-dasharray="2,2"/>
-      <line x1="50" y1="80" x2="50" y2="120" stroke="#1e5fa8" stroke-width="0.3"/>
-      <line x1="30" y1="100" x2="70" y2="100" stroke="#1e5fa8" stroke-width="0.3"/>
+      <circle cx="50" cy="100" r="15" stroke="#1e5fa8" fill="none" stroke-width="0.4" stroke-dasharray="3,3"/>
+      <path d="M50 82 L50 118" stroke="#1e5fa8" stroke-width="0.4"/>
+      <path d="M32 100 L68 100" stroke="#1e5fa8" stroke-width="0.4"/>
+      <!-- 手書き風の追加ディテール -->
+      <text x="75" y="50" font-family="Architects Daughter, cursive" font-size="5" fill="#1e5fa8" opacity="0.6">nose</text>
+      <text x="75" y="100" font-family="Architects Daughter, cursive" font-size="5" fill="#1e5fa8" opacity="0.6">fuel</text>
+      <text x="75" y="150" font-family="Architects Daughter, cursive" font-size="5" fill="#1e5fa8" opacity="0.6">engine</text>
+      <!-- 矢印 -->
+      <path d="M72 48 L67 50 L72 52" stroke="#1e5fa8" stroke-width="0.4" fill="none"/>
+      <path d="M72 98 L67 100 L72 102" stroke="#1e5fa8" stroke-width="0.4" fill="none"/>
+      <path d="M72 148 L67 150 L72 152" stroke="#1e5fa8" stroke-width="0.4" fill="none"/>
     </svg>
   </div>
   
-  <!-- 人工衛星設計図 -->
+  <!-- 人工衛星設計図（手書き風） -->
   <div class="blueprint-satellite">
     <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
       <!-- 本体 -->
-      <rect x="75" y="35" width="50" height="30" stroke="#1e5fa8" fill="none" stroke-width="0.8"/>
-      <!-- ソーラーパネル左 -->
-      <rect x="10" y="38" width="60" height="24" stroke="#1e5fa8" fill="none" stroke-width="0.6"/>
-      <line x1="10" y1="44" x2="70" y2="44" stroke="#1e5fa8" stroke-width="0.3"/>
-      <line x1="10" y1="50" x2="70" y2="50" stroke="#1e5fa8" stroke-width="0.3"/>
-      <line x1="10" y1="56" x2="70" y2="56" stroke="#1e5fa8" stroke-width="0.3"/>
-      <line x1="25" y1="38" x2="25" y2="62" stroke="#1e5fa8" stroke-width="0.3"/>
-      <line x1="40" y1="38" x2="40" y2="62" stroke="#1e5fa8" stroke-width="0.3"/>
-      <line x1="55" y1="38" x2="55" y2="62" stroke="#1e5fa8" stroke-width="0.3"/>
-      <!-- ソーラーパネル右 -->
-      <rect x="130" y="38" width="60" height="24" stroke="#1e5fa8" fill="none" stroke-width="0.6"/>
-      <line x1="130" y1="44" x2="190" y2="44" stroke="#1e5fa8" stroke-width="0.3"/>
-      <line x1="130" y1="50" x2="190" y2="50" stroke="#1e5fa8" stroke-width="0.3"/>
-      <line x1="130" y1="56" x2="190" y2="56" stroke="#1e5fa8" stroke-width="0.3"/>
-      <line x1="145" y1="38" x2="145" y2="62" stroke="#1e5fa8" stroke-width="0.3"/>
-      <line x1="160" y1="38" x2="160" y2="62" stroke="#1e5fa8" stroke-width="0.3"/>
-      <line x1="175" y1="38" x2="175" y2="62" stroke="#1e5fa8" stroke-width="0.3"/>
+      <rect x="75" y="35" width="50" height="30" stroke="#1e5fa8" fill="none" stroke-width="1" rx="2" stroke-linejoin="round"/>
+      <!-- ソーラーパネル左（手書き風） -->
+      <path d="M10 38 Q40 36 70 38 L70 62 Q40 64 10 62 Z" stroke="#1e5fa8" fill="none" stroke-width="0.8"/>
+      <path d="M10 44 Q40 45 70 44" stroke="#1e5fa8" stroke-width="0.4" fill="none"/>
+      <path d="M10 50 Q40 51 70 50" stroke="#1e5fa8" stroke-width="0.4" fill="none"/>
+      <path d="M10 56 Q40 57 70 56" stroke="#1e5fa8" stroke-width="0.4" fill="none"/>
+      <path d="M25 38 Q25 50 25 62" stroke="#1e5fa8" stroke-width="0.4" fill="none"/>
+      <path d="M40 38 Q40 50 40 62" stroke="#1e5fa8" stroke-width="0.4" fill="none"/>
+      <path d="M55 38 Q55 50 55 62" stroke="#1e5fa8" stroke-width="0.4" fill="none"/>
+      <!-- ソーラーパネル右（手書き風） -->
+      <path d="M130 38 Q160 36 190 38 L190 62 Q160 64 130 62 Z" stroke="#1e5fa8" fill="none" stroke-width="0.8"/>
+      <path d="M130 44 Q160 45 190 44" stroke="#1e5fa8" stroke-width="0.4" fill="none"/>
+      <path d="M130 50 Q160 51 190 50" stroke="#1e5fa8" stroke-width="0.4" fill="none"/>
+      <path d="M130 56 Q160 57 190 56" stroke="#1e5fa8" stroke-width="0.4" fill="none"/>
+      <path d="M145 38 Q145 50 145 62" stroke="#1e5fa8" stroke-width="0.4" fill="none"/>
+      <path d="M160 38 Q160 50 160 62" stroke="#1e5fa8" stroke-width="0.4" fill="none"/>
+      <path d="M175 38 Q175 50 175 62" stroke="#1e5fa8" stroke-width="0.4" fill="none"/>
       <!-- アンテナ -->
-      <circle cx="100" cy="25" r="8" stroke="#1e5fa8" fill="none" stroke-width="0.5"/>
-      <line x1="100" y1="35" x2="100" y2="17" stroke="#1e5fa8" stroke-width="0.4"/>
-      <circle cx="100" cy="25" r="3" stroke="#1e5fa8" fill="none" stroke-width="0.3"/>
-      <!-- クロスヘア -->
-      <circle cx="100" cy="50" r="12" stroke="#1e5fa8" fill="none" stroke-width="0.3" stroke-dasharray="2,2"/>
+      <circle cx="100" cy="25" r="8" stroke="#1e5fa8" fill="none" stroke-width="0.6" stroke-dasharray="2,2"/>
+      <path d="M100 35 Q99 28 100 17" stroke="#1e5fa8" stroke-width="0.5" fill="none"/>
+      <circle cx="100" cy="25" r="3" stroke="#1e5fa8" fill="none" stroke-width="0.5"/>
+      <!-- 手書き風ラベル -->
+      <text x="30" y="78" font-family="Architects Daughter, cursive" font-size="6" fill="#1e5fa8" opacity="0.5">solar panel L</text>
+      <text x="140" y="78" font-family="Architects Daughter, cursive" font-size="6" fill="#1e5fa8" opacity="0.5">solar panel R</text>
+      <text x="85" y="15" font-family="Architects Daughter, cursive" font-size="5" fill="#1e5fa8" opacity="0.5">antenna</text>
     </svg>
   </div>
   
