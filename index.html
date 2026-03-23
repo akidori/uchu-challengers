@@ -1064,6 +1064,179 @@
       color: rgba(255,255,255,0.5);
     }
     
+    /* Proposal Link */
+    .proposal-link {
+      display: inline-block;
+      padding: 18px 50px;
+      border: 2px solid rgba(212,175,55,0.6);
+      color: rgba(212,175,55,1);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      transition: all 0.3s;
+    }
+    
+    .proposal-link:hover {
+      background: rgba(212,175,55,0.9);
+      color: #000;
+      border-color: rgba(212,175,55,0.9);
+    }
+    
+    /* Proposal Section */
+    #proposal {
+      background: linear-gradient(180deg, transparent 0%, rgba(212,175,55,0.02) 50%, transparent 100%);
+    }
+    
+    .proposal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      margin: 60px 0;
+    }
+    
+    .proposal-card {
+      padding: 40px;
+      border: 1px solid rgba(212,175,55,0.2);
+      background: rgba(0,0,0,0.3);
+    }
+    
+    .proposal-card h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: rgba(212,175,55,0.9);
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+    }
+    
+    .proposal-card p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 2;
+    }
+    
+    .proposal-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .proposal-card li {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 2.2;
+      padding-left: 20px;
+      position: relative;
+    }
+    
+    .proposal-card li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: rgba(212,175,55,0.8);
+    }
+    
+    .proposal-benefits {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin: 60px 0;
+    }
+    
+    .benefit-item {
+      text-align: center;
+      padding: 30px 20px;
+      border: 1px solid rgba(212,175,55,0.15);
+    }
+    
+    .benefit-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    
+    .benefit-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: rgba(212,175,55,0.9);
+      margin-bottom: 10px;
+    }
+    
+    .benefit-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+    }
+    
+    .proposal-schedule {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin: 40px 0;
+      flex-wrap: wrap;
+    }
+    
+    .schedule-step {
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+      padding: 25px 15px;
+      background: rgba(212,175,55,0.03);
+      border: 1px solid rgba(212,175,55,0.15);
+      position: relative;
+    }
+    
+    .schedule-step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(212,175,55,0.5);
+      font-size: 1.2rem;
+    }
+    
+    .schedule-num {
+      font-size: 0.7rem;
+      color: rgba(212,175,55,0.6);
+      letter-spacing: 0.15em;
+      margin-bottom: 8px;
+    }
+    
+    .schedule-title {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.8);
+    }
+    
+    .schedule-time {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 5px;
+    }
+    
+    .proposal-note {
+      text-align: center;
+      padding: 40px;
+      border: 2px solid rgba(212,175,55,0.3);
+      background: rgba(212,175,55,0.02);
+      margin-top: 60px;
+    }
+    
+    .proposal-note p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 10px;
+    }
+    
+    .proposal-note span {
+      font-size: 0.85rem;
+      color: rgba(212,175,55,0.8);
+    }
+    
+    @media (max-width: 768px) {
+      .proposal-grid { grid-template-columns: 1fr; }
+      .proposal-benefits { grid-template-columns: 1fr; }
+      .schedule-step:not(:last-child)::after { display: none; }
+    }
+    
     /* Process */
     .process {
       display: flex;
@@ -1518,6 +1691,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#team">Team</a></li>
       <li><a href="#services">Services</a></li>
+      <li><a href="#proposal">For You</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -1664,7 +1838,7 @@
           <p class="team-role">Producer</p>
           <h3 class="team-name">塩崎 悠真</h3>
           <p class="team-bio">
-            宇宙物理学専攻。YouTubeデータ分析ツール「kamui tracker」を展開する株式会社エビリーにてマーケティングを担当。YouTubeディレクターコミュニティ「YouTubeラボ」運営。宇宙への情熱とYouTube分析の知見を活かし、本プロジェクトをプロデュース。
+            埼玉大学理学部物理学科卒。株式会社エビリーにてマーケティングを担当。YouTubeデータ分析ツール「kamui tracker」の開発企業として、YouTubeトレンドや企業チャンネル運用に関するセミナー・イベントの責任者を務める。個人ではYouTubeディレクターのコミュニティを主催。幼少期から宇宙が好きで、学生時代にはispace × 大学生のアイディアソンイベントを開催。
           </p>
           <div class="team-links">
             <a href="https://x.com/shiozaki_yuma" target="_blank" rel="noopener" class="team-link">X →</a>
@@ -1709,10 +1883,102 @@
           <div class="service-price">¥500,000〜 <span>/ 本</span></div>
         </div>
       </div>
+      
+      <div style="text-align: center; margin-top: 60px;">
+        <a href="#proposal" class="proposal-link">
+          出演をご検討の方へ →
+        </a>
+      </div>
     </div>
   </section>
   
-  <!-- Process -->
+  <!-- Proposal -->
+  <section id="proposal">
+    <div class="container">
+      <p class="section-label">For You</p>
+      <h2 class="section-title">出演をご検討の方へ</h2>
+      
+      <div class="proposal-grid">
+        <div class="proposal-card">
+          <h3>企画概要</h3>
+          <p>
+            本企画は「宇宙への挑戦者たち」と題し、日本の宇宙開発業界の最前線で活躍される経営者や専門家の方々に密着し、その仕事・日常・情熱をドキュメンタリー形式で発信するYouTubeチャンネルのプロジェクトです。<br><br>
+            一般には触れることの難しい宇宙産業の舞台裏を公開することで、視聴者に宇宙業界の魅力を身近に感じていただくことを目的としています。
+          </p>
+        </div>
+        
+        <div class="proposal-card">
+          <h3>企画の目的</h3>
+          <ul>
+            <li>宇宙業界に憧れ、将来のキャリアとして志望する若者を増やす</li>
+            <li>密着対象企業の魅力を社会に広く伝え、採用やブランディングに寄与する</li>
+            <li>日本が誇る宇宙産業の挑戦者たちの姿を発信し、社会全体の関心を高める</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="proposal-benefits">
+        <div class="benefit-item">
+          <div class="benefit-icon">📢</div>
+          <div class="benefit-title">採用広報効果</div>
+          <div class="benefit-desc">コラボレーション機能を使って貴社YouTubeチャンネルとのコラボとして投稿。求職者にとって強力な動機づけに</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">✨</div>
+          <div class="benefit-title">ブランド価値向上</div>
+          <div class="benefit-desc">最前線企業としての存在感を、社会に広く発信可能</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">🎁</div>
+          <div class="benefit-title">追加費用不要</div>
+          <div class="benefit-desc">企画構成・撮影・編集・公開にかかる費用はすべて弊社側で負担</div>
+        </div>
+      </div>
+      
+      <p class="section-label" style="margin-top: 80px;">Schedule</p>
+      <h2 class="section-title" style="font-size: 1.3rem;">撮影スケジュール</h2>
+      
+      <div class="proposal-schedule">
+        <div class="schedule-step">
+          <div class="schedule-num">STEP 01</div>
+          <div class="schedule-title">打ち合わせ</div>
+          <div class="schedule-time">オンライン30分</div>
+        </div>
+        <div class="schedule-step">
+          <div class="schedule-num">STEP 02</div>
+          <div class="schedule-title">事前インタビュー</div>
+          <div class="schedule-time">約1.5時間</div>
+        </div>
+        <div class="schedule-step">
+          <div class="schedule-num">STEP 03</div>
+          <div class="schedule-title">密着撮影</div>
+          <div class="schedule-time">1日</div>
+        </div>
+        <div class="schedule-step">
+          <div class="schedule-num">STEP 04</div>
+          <div class="schedule-title">編集期間</div>
+          <div class="schedule-time">約3週間</div>
+        </div>
+        <div class="schedule-step">
+          <div class="schedule-num">STEP 05</div>
+          <div class="schedule-title">公開</div>
+          <div class="schedule-time">両チャンネル同時</div>
+        </div>
+      </div>
+      
+      <div class="proposal-note">
+        <p>出演料・制作費用は一切不要です</p>
+        <span>貴社の挑戦と情熱を広く社会に発信させていただきたく、ぜひご協力のほどお願い申し上げます</span>
+      </div>
+      
+      <div style="text-align: center; margin-top: 50px;">
+        <a href="https://docs.google.com/document/d/1P7XbM4cxSX0JNd7VHk4zhxD9N2GAE8mluoZgZb64N58/edit?usp=sharing" target="_blank" rel="noopener" class="proposal-link">
+          企画書（PDF）を見る →
+        </a>
+      </div>
+    </div>
+  </section>
+  
   <section id="process">
     <div class="container">
       <p class="section-label">Process</p>
