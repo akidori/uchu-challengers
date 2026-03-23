@@ -1169,6 +1169,113 @@
       color: rgba(255,255,255,0.3);
     }
     
+    /* About Section - Philosophy */
+    #about {
+      background: linear-gradient(180deg, transparent 0%, rgba(100,50,150,0.03) 50%, transparent 100%);
+    }
+    
+    .philosophy-box {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .philosophy-quote {
+      font-size: 1.8rem;
+      font-weight: 300;
+      line-height: 2;
+      margin-bottom: 40px;
+      letter-spacing: 0.05em;
+    }
+    
+    .philosophy-text {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 2.2;
+      text-align: left;
+    }
+    
+    .philosophy-text p {
+      margin-bottom: 25px;
+    }
+    
+    /* Team Section */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+    
+    .team-card {
+      text-align: center;
+      padding: 40px 30px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: border-color 0.3s;
+    }
+    
+    .team-card:hover {
+      border-color: rgba(255,255,255,0.3);
+    }
+    
+    .team-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 25px;
+      background: linear-gradient(135deg, rgba(100,100,120,0.3), rgba(50,50,70,0.5));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: rgba(255,255,255,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .team-role {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 10px;
+    }
+    
+    .team-name {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 15px;
+      letter-spacing: 0.05em;
+    }
+    
+    .team-bio {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    
+    .team-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .team-link {
+      display: inline-block;
+      padding: 8px 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      transition: all 0.3s;
+    }
+    
+    .team-link:hover {
+      background: #fff;
+      color: #000;
+    }
+    
     /* Responsive */
     @media (max-width: 768px) {
       nav { padding: 15px 20px; }
@@ -1180,6 +1287,8 @@
       .services-grid { grid-template-columns: 1fr; }
       .process-step::after { display: none; }
       .section-title { font-size: 1.5rem; }
+      .philosophy-quote { font-size: 1.3rem; }
+      .team-grid { gap: 30px; }
     }
   </style>
 </head>
@@ -1227,6 +1336,8 @@
     <ul class="nav-links">
       <li><a href="#channel">Channel</a></li>
       <li><a href="#works">Works</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#team">Team</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -1312,6 +1423,72 @@
             <h3 class="work-title">塔本愛｜コスモ女子</h3>
             <p class="work-meta">宇宙業界で活躍する女性コミュニティ</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- About - Philosophy -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label">Philosophy</p>
+      <h2 class="section-title">チャンネル理念</h2>
+      
+      <div class="philosophy-box">
+        <p class="philosophy-quote">
+          「宇宙に挑む人々の"想い"を、<br>映像で届ける」
+        </p>
+        
+        <div class="philosophy-text">
+          <p>
+            宇宙産業は今、大きな転換期を迎えています。<br>
+            国家主導から民間主導へ。巨大企業から、情熱を持ったスタートアップへ。<br>
+            日本でも100社を超える宇宙ベンチャーが、それぞれの夢を追いかけています。
+          </p>
+          <p>
+            しかし、彼らの挑戦は十分に知られていません。<br>
+            技術の革新性、創業者の想い、チームの葛藤、そして宇宙への情熱。<br>
+            それらを伝えるメディアが、日本にはまだ存在しませんでした。
+          </p>
+          <p>
+            「宇宙への挑戦者たち」は、日本初の宇宙特化ドキュメンタリーチャンネルとして、<br>
+            宇宙に挑む人々の「リアル」を、密着取材を通じて届けます。<br>
+            プロモーションではなく、ドキュメンタリー。<br>
+            表面ではなく、深層。<br>
+            私たちは、挑戦者たちの物語を、未来に残します。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Team -->
+  <section id="team">
+    <div class="container">
+      <p class="section-label">Team</p>
+      <h2 class="section-title">製作陣</h2>
+      
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-photo">👤</div>
+          <p class="team-role">Producer</p>
+          <h3 class="team-name">塩崎 悠真</h3>
+          <p class="team-bio">
+            宇宙物理学専攻。YouTubeデータ分析ツール「kamui tracker」を展開する株式会社エビリーにてマーケティングを担当。YouTubeディレクターコミュニティ「YouTubeラボ」運営。宇宙への情熱とYouTube分析の知見を活かし、本プロジェクトをプロデュース。
+          </p>
+          <div class="team-links">
+            <a href="https://x.com/shiozaki_yuma" target="_blank" rel="noopener" class="team-link">X →</a>
+          </div>
+        </div>
+        
+        <div class="team-card">
+          <div class="team-photo">👤</div>
+          <p class="team-role">Director / Editor</p>
+          <h3 class="team-name">Coming Soon</h3>
+          <p class="team-bio">
+            撮影・編集を担当するディレクター。<br>
+            詳細は近日公開予定。
+          </p>
         </div>
       </div>
     </div>
