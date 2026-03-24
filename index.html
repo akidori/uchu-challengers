@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="dark">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,40 +7,6 @@
   <meta name="description" content="宇宙スタートアップ・宇宙ベンチャーに特化した密着ドキュメンタリー制作。PR動画・採用動画の制作も承ります。">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap');
-    
-    /* ========================================
-       CSS変数 - ダークモード（デフォルト）
-       ======================================== */
-    :root {
-      --bg-primary: #000;
-      --bg-secondary: rgba(0,0,0,0.3);
-      --text-primary: #fff;
-      --text-secondary: rgba(255,255,255,0.7);
-      --text-muted: rgba(255,255,255,0.5);
-      --accent: rgba(212,175,55,1);
-      --accent-light: rgba(212,175,55,0.6);
-      --accent-bg: rgba(212,175,55,0.02);
-      --border: rgba(255,255,255,0.1);
-      --border-accent: rgba(212,175,55,0.3);
-      --card-bg: rgba(0,0,0,0.5);
-    }
-    
-    /* ========================================
-       ライトモード - ブループリント・設計図
-       ======================================== */
-    [data-theme="light"] {
-      --bg-primary: #f8fbff;
-      --bg-secondary: rgba(240,248,255,0.9);
-      --text-primary: #1a365d;
-      --text-secondary: rgba(26,54,93,0.8);
-      --text-muted: rgba(26,54,93,0.5);
-      --accent: #2563eb;
-      --accent-light: rgba(37,99,235,0.6);
-      --accent-bg: rgba(37,99,235,0.03);
-      --border: rgba(37,99,235,0.15);
-      --border-accent: rgba(37,99,235,0.4);
-      --card-bg: rgba(255,255,255,0.8);
-    }
     
     * {
       margin: 0;
@@ -55,518 +21,32 @@
     
     body {
       font-family: 'Noto Sans JP', sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
+      background: #000;
+      color: #fff;
       line-height: 1.8;
       overflow-x: hidden;
-      transition: background 0.5s, color 0.5s;
     }
     
     /* ========================================
-       テーマ切り替えボタン
+       スクロールフェードインアニメーション
        ======================================== */
-    .theme-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 50px;
-      padding: 8px 16px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.8rem;
-      color: var(--text-primary);
-      backdrop-filter: blur(10px);
-      transition: all 0.3s;
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     }
     
-    .theme-toggle:hover {
-      border-color: var(--accent);
-      transform: scale(1.05);
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     
-    .theme-toggle-icon {
-      font-size: 1.1rem;
-    }
-    
-    /* ダークモード時は月アイコン、ライトモード時は太陽アイコン */
-    [data-theme="dark"] .theme-toggle-icon::before { content: '🌙'; }
-    [data-theme="light"] .theme-toggle-icon::before { content: '☀️'; }
-    [data-theme="dark"] .theme-toggle-text::before { content: 'Light'; }
-    [data-theme="light"] .theme-toggle-text::before { content: 'Dark'; }
-    
-    /* ========================================
-       ライトモード - 宇宙写真 + ブループリント
-       ======================================== */
-    
-    /* メイン背景 - 地球の高画質画像 */
-    .light-bg-main {
-      display: none;
-    }
-    
-    [data-theme="light"] .light-bg-main {
-      display: block;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      background: 
-        linear-gradient(135deg, rgba(230,242,255,0.97) 0%, rgba(240,248,255,0.95) 50%, rgba(220,235,255,0.97) 100%);
-    }
-    
-    /* ISS写真 - Hero背景 */
-    .light-photo-iss {
-      display: none;
-    }
-    
-    [data-theme="light"] .light-photo-iss {
-      display: block;
-      position: fixed;
-      top: 0;
-      right: -10%;
-      width: 70%;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 0;
-      background: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1920&q=80') center/cover no-repeat;
-      mask-image: linear-gradient(to left, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.15) 40%, transparent 70%);
-      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.15) 40%, transparent 70%);
-      filter: saturate(0.3) contrast(1.1);
-      opacity: 0.5;
-    }
-    
-    /* ロケット打ち上げ写真 - Works周辺 */
-    .light-photo-rocket {
-      display: none;
-    }
-    
-    [data-theme="light"] .light-photo-rocket {
-      display: block;
-      position: fixed;
-      bottom: 10%;
-      left: -5%;
-      width: 50%;
-      height: 60vh;
-      pointer-events: none;
-      z-index: 0;
-      background: url('https://images.unsplash.com/photo-1517976487492-5750f3195933?w=1920&q=80') center/cover no-repeat;
-      mask-image: linear-gradient(to right, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 50%, transparent 80%);
-      -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 50%, transparent 80%);
-      filter: saturate(0.2) contrast(1.1);
-      opacity: 0.4;
-    }
-    
-    /* 人工衛星写真 */
-    .light-photo-satellite {
-      display: none;
-    }
-    
-    [data-theme="light"] .light-photo-satellite {
-      display: block;
-      position: fixed;
-      top: 30%;
-      left: 5%;
-      width: 35%;
-      height: 40vh;
-      pointer-events: none;
-      z-index: 0;
-      background: url('https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?w=1200&q=80') center/cover no-repeat;
-      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.15) 0%, transparent 70%);
-      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.15) 0%, transparent 70%);
-      filter: saturate(0.2) contrast(1.1);
-      opacity: 0.35;
-    }
-    
-    /* 月面写真 */
-    .light-photo-moon {
-      display: none;
-    }
-    
-    [data-theme="light"] .light-photo-moon {
-      display: block;
-      position: fixed;
-      bottom: 5%;
-      right: 5%;
-      width: 300px;
-      height: 300px;
-      pointer-events: none;
-      z-index: 0;
-      background: url('https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=800&q=80') center/cover no-repeat;
-      border-radius: 50%;
-      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 50%, transparent 70%);
-      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 50%, transparent 70%);
-      filter: saturate(0.1) contrast(1.2);
-      opacity: 0.3;
-    }
-    
-    /* ブループリントグリッドオーバーレイ */
-    .blueprint-bg {
-      display: none;
-    }
-    
-    [data-theme="light"] .blueprint-bg {
-      display: block;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-      background: 
-        linear-gradient(rgba(37,99,235,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(37,99,235,0.06) 1px, transparent 1px),
-        linear-gradient(rgba(37,99,235,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(37,99,235,0.03) 1px, transparent 1px);
-      background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
-    }
-    
-    /* ロケット設計図SVG - 大きく */
-    .blueprint-rocket {
-      display: none;
-    }
-    
-    [data-theme="light"] .blueprint-rocket {
-      display: block;
-      position: fixed;
-      top: 5%;
-      right: 3%;
-      width: 400px;
-      height: 800px;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.12;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 200'%3E%3C!-- Rocket body --%3E%3Cpath d='M50 5 L55 15 L60 40 L60 120 L65 140 L65 160 L55 155 L55 165 L50 175 L45 165 L45 155 L35 160 L35 140 L40 120 L40 40 L45 15 Z' stroke='%232563eb' fill='none' stroke-width='0.8'/%3E%3C!-- Window --%3E%3Ccircle cx='50' cy='35' r='10' stroke='%232563eb' fill='none' stroke-width='0.6'/%3E%3Ccircle cx='50' cy='35' r='6' stroke='%232563eb' fill='none' stroke-width='0.3'/%3E%3C!-- Fins --%3E%3Cpath d='M40 120 L25 155 L35 160' stroke='%232563eb' fill='none' stroke-width='0.6'/%3E%3Cpath d='M60 120 L75 155 L65 160' stroke='%232563eb' fill='none' stroke-width='0.6'/%3E%3C!-- Detail lines --%3E%3Cline x1='42' y1='60' x2='58' y2='60' stroke='%232563eb' stroke-width='0.3'/%3E%3Cline x1='42' y1='80' x2='58' y2='80' stroke='%232563eb' stroke-width='0.3'/%3E%3Cline x1='42' y1='100' x2='58' y2='100' stroke='%232563eb' stroke-width='0.3'/%3E%3C!-- Dimension lines --%3E%3Cline x1='20' y1='5' x2='20' y2='175' stroke='%232563eb' stroke-width='0.2' stroke-dasharray='2,2'/%3E%3Cline x1='18' y1='5' x2='22' y2='5' stroke='%232563eb' stroke-width='0.3'/%3E%3Cline x1='18' y1='175' x2='22' y2='175' stroke='%232563eb' stroke-width='0.3'/%3E%3Ctext x='12' y='95' fill='%232563eb' font-size='4' transform='rotate(-90 12 95)'>170m</text>%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-size: contain;
-    }
-    
-    /* 人工衛星設計図SVG - 大きく */
-    .blueprint-satellite {
-      display: none;
-    }
-    
-    [data-theme="light"] .blueprint-satellite {
-      display: block;
-      position: fixed;
-      bottom: 20%;
-      left: 2%;
-      width: 500px;
-      height: 250px;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.1;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3C!-- Main body --%3E%3Crect x='75' y='35' width='50' height='30' stroke='%232563eb' fill='none' stroke-width='0.8'/%3E%3C!-- Solar panels --%3E%3Crect x='5' y='25' width='65' height='50' stroke='%232563eb' fill='none' stroke-width='0.6'/%3E%3Crect x='130' y='25' width='65' height='50' stroke='%232563eb' fill='none' stroke-width='0.6'/%3E%3C!-- Panel cells --%3E%3Cline x1='5' y1='37' x2='70' y2='37' stroke='%232563eb' stroke-width='0.2'/%3E%3Cline x1='5' y1='50' x2='70' y2='50' stroke='%232563eb' stroke-width='0.2'/%3E%3Cline x1='5' y1='63' x2='70' y2='63' stroke='%232563eb' stroke-width='0.2'/%3E%3Cline x1='130' y1='37' x2='195' y2='37' stroke='%232563eb' stroke-width='0.2'/%3E%3Cline x1='130' y1='50' x2='195' y2='50' stroke='%232563eb' stroke-width='0.2'/%3E%3Cline x1='130' y1='63' x2='195' y2='63' stroke='%232563eb' stroke-width='0.2'/%3E%3Cline x1='22' y1='25' x2='22' y2='75' stroke='%232563eb' stroke-width='0.2'/%3E%3Cline x1='38' y1='25' x2='38' y2='75' stroke='%232563eb' stroke-width='0.2'/%3E%3Cline x1='54' y1='25' x2='54' y2='75' stroke='%232563eb' stroke-width='0.2'/%3E%3Cline x1='146' y1='25' x2='146' y2='75' stroke='%232563eb' stroke-width='0.2'/%3E%3Cline x1='162' y1='25' x2='162' y2='75' stroke='%232563eb' stroke-width='0.2'/%3E%3Cline x1='178' y1='25' x2='178' y2='75' stroke='%232563eb' stroke-width='0.2'/%3E%3C!-- Antenna --%3E%3Ccircle cx='100' cy='50' r='8' stroke='%232563eb' fill='none' stroke-width='0.5'/%3E%3Cline x1='100' y1='15' x2='100' y2='30' stroke='%232563eb' stroke-width='0.4'/%3E%3Ccircle cx='100' cy='12' r='3' stroke='%232563eb' fill='none' stroke-width='0.3'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-size: contain;
-    }
-    
-    /* 寸法線・注釈 */
-    .blueprint-dimensions {
-      display: none;
-    }
-    
-    [data-theme="light"] .blueprint-dimensions {
-      display: block;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-    
-    [data-theme="light"] .dimension-line-v {
-      position: absolute;
-      left: 4%;
-      top: 15%;
-      width: 2px;
-      height: 300px;
-      background: rgba(37,99,235,0.15);
-    }
-    
-    [data-theme="light"] .dimension-line-v::before,
-    [data-theme="light"] .dimension-line-v::after {
-      content: '';
-      position: absolute;
-      left: -6px;
-      width: 14px;
-      height: 2px;
-      background: rgba(37,99,235,0.2);
-    }
-    
-    [data-theme="light"] .dimension-line-v::before { top: 0; }
-    [data-theme="light"] .dimension-line-v::after { bottom: 0; }
-    
-    [data-theme="light"] .dimension-line-h {
-      position: absolute;
-      bottom: 8%;
-      left: 15%;
-      height: 2px;
-      width: 400px;
-      background: rgba(37,99,235,0.15);
-    }
-    
-    [data-theme="light"] .dimension-line-h::before,
-    [data-theme="light"] .dimension-line-h::after {
-      content: '';
-      position: absolute;
-      top: -6px;
-      height: 14px;
-      width: 2px;
-      background: rgba(37,99,235,0.2);
-    }
-    
-    [data-theme="light"] .dimension-line-h::before { left: 0; }
-    [data-theme="light"] .dimension-line-h::after { right: 0; }
-    
-    /* 角のマーカー - より目立つ */
-    [data-theme="light"] .corner-mark-1 {
-      position: absolute;
-      top: 5%;
-      left: 2%;
-      width: 80px;
-      height: 80px;
-      border-left: 3px solid rgba(37,99,235,0.25);
-      border-top: 3px solid rgba(37,99,235,0.25);
-    }
-    
-    [data-theme="light"] .corner-mark-2 {
-      position: absolute;
-      top: 5%;
-      right: 2%;
-      width: 80px;
-      height: 80px;
-      border-right: 3px solid rgba(37,99,235,0.25);
-      border-top: 3px solid rgba(37,99,235,0.25);
-    }
-    
-    [data-theme="light"] .corner-mark-3 {
-      position: absolute;
-      bottom: 5%;
-      left: 2%;
-      width: 80px;
-      height: 80px;
-      border-left: 3px solid rgba(37,99,235,0.25);
-      border-bottom: 3px solid rgba(37,99,235,0.25);
-    }
-    
-    [data-theme="light"] .corner-mark-4 {
-      position: absolute;
-      bottom: 5%;
-      right: 2%;
-      width: 80px;
-      height: 80px;
-      border-right: 3px solid rgba(37,99,235,0.25);
-      border-bottom: 3px solid rgba(37,99,235,0.25);
-    }
-    
-    /* クロスヘア（照準） */
-    [data-theme="light"] .crosshair-1 {
-      position: absolute;
-      top: 25%;
-      right: 20%;
-      width: 60px;
-      height: 60px;
-      border: 1px solid rgba(37,99,235,0.15);
-      border-radius: 50%;
-    }
-    
-    [data-theme="light"] .crosshair-1::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: -15px;
-      right: -15px;
-      height: 1px;
-      background: rgba(37,99,235,0.15);
-    }
-    
-    [data-theme="light"] .crosshair-1::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: -15px;
-      bottom: -15px;
-      width: 1px;
-      background: rgba(37,99,235,0.15);
-    }
-    
-    [data-theme="light"] .crosshair-2 {
-      position: absolute;
-      bottom: 35%;
-      left: 25%;
-      width: 40px;
-      height: 40px;
-      border: 1px solid rgba(37,99,235,0.12);
-      border-radius: 50%;
-    }
-    
-    [data-theme="light"] .crosshair-2::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: -10px;
-      right: -10px;
-      height: 1px;
-      background: rgba(37,99,235,0.12);
-    }
-    
-    [data-theme="light"] .crosshair-2::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: -10px;
-      bottom: -10px;
-      width: 1px;
-      background: rgba(37,99,235,0.12);
-    }
-    
-    /* ダークモード時は宇宙背景を表示 */
-    [data-theme="light"] .stars,
-    [data-theme="light"] .stars-layer-1,
-    [data-theme="light"] .stars-layer-2,
-    [data-theme="light"] .stars-layer-3,
-    [data-theme="light"] .nebula-layer,
-    [data-theme="light"] .space-objects,
-    [data-theme="light"] .blueprint-layer {
-      display: none !important;
-    }
-    
-    /* ========================================
-       ライトモード用のカードスタイル
-       ======================================== */
-    [data-theme="light"] section {
-      background: transparent;
-    }
-    
-    [data-theme="light"] .work-card,
-    [data-theme="light"] .proposal-card,
-    [data-theme="light"] .benefit-item,
-    [data-theme="light"] .team-card,
-    [data-theme="light"] .schedule-step {
-      background: rgba(255,255,255,0.85);
-      border: 1px solid rgba(37,99,235,0.2);
-      backdrop-filter: blur(15px);
-      box-shadow: 0 8px 32px rgba(37,99,235,0.08);
-    }
-    
-    [data-theme="light"] .proposal-card h3,
-    [data-theme="light"] .benefit-title,
-    [data-theme="light"] .team-role {
-      color: var(--accent);
-    }
-    
-    [data-theme="light"] .section-label {
-      color: var(--accent);
-    }
-    
-    [data-theme="light"] .hero-cta {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: rgba(255,255,255,0.8);
-    }
-    
-    [data-theme="light"] .hero-cta:hover {
-      background: var(--accent);
-      color: #fff;
-    }
-    
-    [data-theme="light"] .proposal-link {
-      border-color: var(--accent-light);
-      color: var(--accent);
-      background: rgba(255,255,255,0.8);
-    }
-    
-    [data-theme="light"] .proposal-link:hover {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-    }
-    
-    [data-theme="light"] .proposal-note {
-      border-color: var(--border-accent);
-      background: rgba(255,255,255,0.85);
-    }
-    
-    [data-theme="light"] .proposal-note p {
-      color: var(--accent);
-    }
-    
-    [data-theme="light"] nav {
-      background: rgba(248,251,255,0.95);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid rgba(37,99,235,0.1);
-    }
-    
-    [data-theme="light"] .nav-logo {
-      color: var(--text-primary);
-    }
-    
-    [data-theme="light"] .nav-links a {
-      color: var(--text-secondary);
-    }
-    
-    [data-theme="light"] .nav-links a:hover {
-      color: var(--accent);
-    }
-    
-    [data-theme="light"] .contact-link {
-      border-color: rgba(37,99,235,0.2);
-      color: var(--text-primary);
-      background: rgba(255,255,255,0.8);
-    }
-    
-    [data-theme="light"] .contact-link:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-    
-    /* ライトモードのロゴ - 青色調整 */
-    [data-theme="light"] .hero-logo {
-      filter: brightness(0) saturate(100%) invert(22%) sepia(87%) saturate(1552%) hue-rotate(213deg) brightness(94%) contrast(93%);
-    }
-    
-    /* ライトモードのWorksセクション */
-    [data-theme="light"] #works {
-      background: rgba(240,248,255,0.7);
-    }
-    
-    [data-theme="light"] .work-title {
-      color: var(--text-primary);
-    }
-    
-    [data-theme="light"] .work-desc {
-      color: var(--text-secondary);
-    }
-    
-    /* ライトモードのChannel埋め込み */
-    [data-theme="light"] .main-video-wrapper {
-      background: rgba(255,255,255,0.9);
-      border: 1px solid rgba(37,99,235,0.15);
-    }
-    
-    /* ライトモードのTeamセクション */
-    [data-theme="light"] .team-photo {
-      border-color: var(--accent);
-    }
-    
-    [data-theme="light"] .team-name {
-      color: var(--text-primary);
-    }
-    
-    [data-theme="light"] .team-bio {
-      color: var(--text-secondary);
-    }
-    
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+    .stagger-5 { transition-delay: 0.5s; }
+
     /* Stars - 3層の星空 */
     .stars {
       position: fixed;
@@ -2564,34 +2044,6 @@
   </style>
 </head>
 <body>
-  <!-- テーマ切り替えボタン -->
-  <button class="theme-toggle" onclick="toggleTheme()">
-    <span class="theme-toggle-icon"></span>
-    <span class="theme-toggle-text"></span>
-  </button>
-  
-  <!-- ライトモード用ブループリント背景 -->
-  <div class="blueprint-bg"></div>
-  <div class="blueprint-rocket"></div>
-  <div class="blueprint-satellite"></div>
-  <div class="blueprint-dimensions">
-    <div class="dimension-line-v"></div>
-    <div class="dimension-line-h"></div>
-    <div class="corner-mark-1"></div>
-    <div class="corner-mark-2"></div>
-    <div class="corner-mark-3"></div>
-    <div class="corner-mark-4"></div>
-    <div class="crosshair-1"></div>
-    <div class="crosshair-2"></div>
-  </div>
-  
-  <!-- ライトモード用宇宙写真背景 -->
-  <div class="light-bg-main"></div>
-  <div class="light-photo-iss"></div>
-  <div class="light-photo-rocket"></div>
-  <div class="light-photo-satellite"></div>
-  <div class="light-photo-moon"></div>
-  
   <!-- 星空レイヤー -->
   <div class="stars"></div>
   <div class="stars-layer-1"></div>
@@ -2630,24 +2082,6 @@
   </div>
   
   <!-- 設計図・ブループリント風レイヤー -->
-  <div class="blueprint-layer">
-    <div class="blueprint-grid"></div>
-    <div class="blueprint-grid-fine"></div>
-    <div class="blueprint-diagonal"></div>
-    <div class="blueprint-circle-1"></div>
-    <div class="blueprint-circle-2"></div>
-    <div class="blueprint-crosshair"></div>
-    <div class="blueprint-corner-1"></div>
-    <div class="blueprint-corner-2"></div>
-    <div class="blueprint-corner-3"></div>
-    <div class="blueprint-corner-4"></div>
-    <div class="blueprint-measure-1"></div>
-    <div class="blueprint-measure-2"></div>
-    <div class="blueprint-orbit"></div>
-    <div class="blueprint-angle"></div>
-    <div class="blueprint-dot-1"></div>
-    <div class="blueprint-dot-2"></div>
-    <div class="blueprint-dot-3"></div>
   </div>
   
   <!-- Navigation -->
@@ -2969,18 +2403,13 @@
     const logoUrl = '/mnt/user-data/uploads/36f62a97be5b50d2.png';
     
     // テーマ切り替え機能
-    function toggleTheme() {
       const html = document.documentElement;
-      const currentTheme = html.getAttribute('data-theme');
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
     }
     
     // ページ読み込み時にテーマを復元
     (function() {
-      const savedTheme = localStorage.getItem('theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', savedTheme);
     })();
     
     // スクロールフェードインアニメーション
