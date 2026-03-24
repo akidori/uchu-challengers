@@ -2399,19 +2399,6 @@
   </footer>
 
   <script>
-    // ロゴ画像をBase64で埋め込む（外部ファイル参照用のフォールバック）
-    const logoUrl = '/mnt/user-data/uploads/36f62a97be5b50d2.png';
-    
-    // テーマ切り替え機能
-      const html = document.documentElement;
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      localStorage.setItem('theme', newTheme);
-    }
-    
-    // ページ読み込み時にテーマを復元
-    (function() {
-    })();
-    
     // スクロールフェードインアニメーション
     (function() {
       const observerOptions = {
